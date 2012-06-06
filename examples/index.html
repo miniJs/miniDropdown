@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>jQuery Naaav Basic Example</title>
+    
+    <style>
+        * { margin:0; padding:0; }
+        body { background:#eee; }
+        nav { background:#333; }
+        #nav { font:13px normal helvetica,arial,sans-serif; margin:0 auto; width:600px; height:40px; }
+        #nav li { float:left; list-style-type:none; }
+        #nav a { display:block; padding:12px 20px 0; height:28px; color:#ddd; text-decoration:none; text-shadow:1px 1px 0 #000; background:#333; }
+        #nav a:hover,
+        #nav a.active { background:#666; }
+        
+        #nav ul { position:absolute; display:none; }
+        #nav ul li { float:none; }
+        #nav ul li a { width:150px; background:#666; }
+        #nav ul li a:hover { background:#999; text-shadow:none; color:#000; }
+    </style>
+    
+</head>
+<body>
+    
+    <nav>
+        <ul id="nav">
+            <li><a href="#">Home</a></li>
+            <li>
+                <a href="#">About</a>
+                <ul>
+                    <li><a href="#">Another</a></li>
+                    <li><a href="#">Generic</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Item</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Another</a>
+                <ul>
+                    <li><a href="#">Generic</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Item</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Generic</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Item</a></li>
+        </ul>
+    </nav>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="../jquery.naaav.js"></script>
+    <script>
+        $(function(){
+            $('#nav').naaav();
+        });
+    </script>
+</body>
+</html>
