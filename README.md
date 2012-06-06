@@ -18,10 +18,14 @@ https://github.com/miniJs/miniDropdown/issues
 
 ## Developer
 
-Developed by <a href="mailto:matthieu.aussaguel@gmail">Matthieu Aussaguel</a>, <a href="http://mynameismatthieu.com">mynameismatthieu.com</a>
+Developed by [Matthieu Aussaguel](mailto:matthieu.aussaguel@gmail.com), [mynameismatthieu.com](http://mynameismatthieu.com)
 
 + http://twitter.com/mattaussaguel
 + http://github.com/matthieua
+
+## Contributors
+
+Orgiinally created by Victor Nguyen [@victornguyen](http://twitter.com/victornguyen)
 
 ## To Do
 
