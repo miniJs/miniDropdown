@@ -29,6 +29,8 @@ Special thanks to Victor Nguyen [@victornguyen](http://twitter.com/victornguyen)
 
 ## To Do
 
+- Add test coverage
+
 ## Licence
 
 Copyright &copy; 2012 Matthieu Aussaguel
