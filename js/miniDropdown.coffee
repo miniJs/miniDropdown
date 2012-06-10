@@ -10,15 +10,15 @@
 $ ->
   $.miniDropdown = (element, options) ->
     @defaults = 
-      activeClass:  "active"
-      animation:    "basic"
-      easing:       "swing"
-      show:         0
-      hide:         0
-      delayIn:      0
-      delayOut:     0
-      hideFuntion:  null
-      showFunction: null
+      activeClass:  "active" # css class added to the ul active element
+      animation:    "basic"  # dropdown animation: 'basic' | 'fade' | 'slide'
+      easing:       "swing"  # easing equation used during the animation
+      show:         0        # show animation duration in milliseconds
+      hide:         0        # hide animation duration in milliseconds
+      delayIn:      0        # delay duration on show in milliseconds
+      delayOut:     0        # delay duration on hide in milliseconds
+      showFunction: null     # custom show function
+      hideFuntion:  null     # custom hide function
 
     animateMethods =
       basic:

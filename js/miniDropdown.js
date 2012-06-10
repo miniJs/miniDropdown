@@ -13,8 +13,8 @@
         hide: 0,
         delayIn: 0,
         delayOut: 0,
-        hideFuntion: null,
-        showFunction: null
+        showFunction: null,
+        hideFuntion: null
       };
       animateMethods = {
         basic: {

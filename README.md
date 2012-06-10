@@ -4,11 +4,11 @@ miniDropdown is a dropdown jQuery plugin written in CoffeeScript useful for menu
 
 ## Version
 
-no version yet
+v0.1 Beta
 
 ## Website Url
 
-coming soon
+http://minijs.com/plugins/11/dropdown
 
 ## Bug tracker
 
@@ -25,7 +25,7 @@ Developed by [Matthieu Aussaguel](mailto:matthieu.aussaguel@gmail.com), [mynamei
 
 ## Contributors
 
-Orgiinally created by Victor Nguyen [@victornguyen](http://twitter.com/victornguyen)
+Special thanks to Victor Nguyen [@victornguyen](http://twitter.com/victornguyen) who originally created the [plugin](https://github.com/victornguyen/naaav).
 
 ## To Do
 
