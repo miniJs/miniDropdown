@@ -2,7 +2,7 @@
 # miniDropdown, a dropdown plugin for jQuery
 # Instructions: coming soon...
 # By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @mattaussaguel
-# Version: coming soon...
+# Version: v0.1 Beta
 # Updated: June 10, 2012
 # More info: http://minijs.com/
 #
@@ -53,7 +53,7 @@ $ ->
     toggle = (type, $item) =>
       $subnav = getSubNav($item)
       window.clearTimeout $item.data("timeoutId")
-      
+
       if type is 'show'
         fn    = if $.isFunction(@settings.showFunction) then @settings.showFunction else show
         delay = @settings.delayIn

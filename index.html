@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Coffeescript jQuery Dropdown plugin</title>
+    <title>miniDrodown - jQuery Plugin</title>
   <link rel="stylesheet" href="css/site.css">
   <!--[if IE]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -11,8 +11,15 @@
 </head>
 <body>
   <div id="container">
-    <nav>
-      <ul class="dropdown" id="mini-dropdown-1">
+      <header>
+    <h1>
+      <strong>miniDropdown demo</strong> - jQuery Plugin
+    </h1>
+  </header>
+
+    <h2>Default</h2>
+    <nav id="mini-dropdown-1">
+      <ul class="dropdown">
        <li>
         <a href="#">Home</a>
         <ul>
@@ -43,8 +50,9 @@
     </ul>
   </nav>
 
-  <nav>
-    <ul class="dropdown" id="mini-dropdown-2">
+  <h2>Animation</h2>
+  <nav id="mini-dropdown-2">
+    <ul class="dropdown">
       <li>
         <a href="#">Home</a>
         <ul>
@@ -68,8 +76,9 @@
     </ul>
   </nav>
 
-  <nav>
-    <ul class="dropdown" id="mini-dropdown-3">
+  <h2>Custom Animation</h2>
+  <nav id="mini-dropdown-3">
+    <ul class="dropdown">
       <li>
         <a href="#">Home</a>
         <ul>
@@ -99,10 +108,10 @@
 <script>
 $(function(){
     // Basic example
-    $('#mini-dropdown-1').miniDropdown();
+    $('#mini-dropdown-1 .dropdown').miniDropdown();
 
     // Built in animation
-    $('#mini-dropdown-2').miniDropdown({
+    $('#mini-dropdown-2 .dropdown').miniDropdown({
       animation: 'slide', 
       show: 100,
       hide: 100,
@@ -111,7 +120,7 @@ $(function(){
     });
 
     // Custom animations
-    $('#mini-dropdown-3').miniDropdown({
+    $('#mini-dropdown-3 .dropdown').miniDropdown({
       showFunction: function(item, subnav) {
         subnav.css({right: 0, opacity: 0}).show();
         subnav.animate({right: $(window).width() - item.offset().left - item.width() , opacity: 1}, 200)
