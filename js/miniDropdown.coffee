@@ -11,14 +11,25 @@ $ ->
   $.miniDropdown = (element, options) ->
     @defaults = 
       activeClass: "active"
-      animation:   "slide"
+      animation:   "basic"
       easing:      "swing"
-      show:        100
-      hide:        100
-      delayIn:     100
-      delayOut:    200
+      show:        0
+      hide:        0
+      delayIn:     0
+      delayOut:    0
       showFunc:    null
       hideFunc:    null
+
+    animateMethods =
+      basic:
+        show: "show"
+        hide: "hide"
+      fade:
+        show: "fadeIn"
+        hide: "fadeOut"
+      slide:
+        show: "slideDown"
+        hide: "slideUp"
 
     # current state
     @state = ''
@@ -31,13 +42,16 @@ $ ->
 
     # Private methods
     animate = ($subnav, type) =>
-      $subnav.stop(false, true)[@animateMethod[type]] @settings[type], @settings.easing, ->
+      $subnav.stop(false, true) 
+      $subnav[animateMethods[@settings.animation][type]](@settings[type], @settings.easing, ->
         $(this)[type]()
+      )
 
     show = ($item, $subnav) =>
       hideAll $item
       $item.children("a").addClass(@settings.activeClass)
       window.clearTimeout $item.data("timeoutId")
+      console.log(@settings.delayIn)
       $item.data "timeoutId", window.setTimeout(=>
         animate $subnav, "show"
       , @settings.delayIn)
@@ -49,13 +63,7 @@ $ ->
         animate $subnav, "hide"
       , @settings.delayOut)
 
-    getSubNav = ($link) =>
-      $link.children("ul").first()
-
-    setElems = =>
-      @$items   = @$element.children("li")
-      @$links   = @$items.children("a")
-      @$subnavs = @$items.children("ul")
+    getSubNav = ($link) => $link.children("ul").first()
 
     hideAll = ($item) =>
       @$links.removeClass @settings.activeClass
@@ -79,24 +87,13 @@ $ ->
     @init = ->
       @settings = $.extend {}, @defaults, options
       self = this
-      setElems()
+
+      @$items   = @$element.children("li")
+      @$links   = @$items.children("a")
+      @$subnavs = @$items.children("ul")
 
       hasEasingFunc = ($.isFunction($.easing[@settings.easing]))
       @settings.easing = "swing"  unless hasEasingFunc
-
-      switch @settings.animation
-        when "fade"
-          @animateMethod =
-            show: "fadeIn"
-            hide: "fadeOut"
-        when "slide"
-          @animateMethod =
-            show: "slideDown"
-            hide: "slideUp"
-        else
-          @animateMethod =
-            show: "show"
-            hide: "hide"
 
       @$items.bind
         mouseenter: (e) =>
@@ -104,7 +101,6 @@ $ ->
           $subnav = getSubNav($item)
           fn = (if $.isFunction(@settings.showFunc) then @settings.showFunc else show)
           fn.apply self, [ $item, $subnav ]
-
         mouseleave: (e) =>
           $item = $ e.currentTarget
           $subnav = getSubNav($item)

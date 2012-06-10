@@ -3,24 +3,39 @@
 
   $(function() {
     $.miniDropdown = function(element, options) {
-      var animate, getSubNav, hide, hideAll, setElems, setState, show,
+      var animate, animateMethods, getSubNav, hide, hideAll, setState, show,
         _this = this;
       this.defaults = {
         activeClass: "active",
-        animation: "slide",
+        animation: "basic",
         easing: "swing",
-        show: 100,
-        hide: 100,
-        delayIn: 100,
-        delayOut: 200,
+        show: 0,
+        hide: 0,
+        delayIn: 0,
+        delayOut: 0,
         showFunc: null,
         hideFunc: null
+      };
+      animateMethods = {
+        basic: {
+          show: "show",
+          hide: "hide"
+        },
+        fade: {
+          show: "fadeIn",
+          hide: "fadeOut"
+        },
+        slide: {
+          show: "slideDown",
+          hide: "slideUp"
+        }
       };
       this.state = '';
       this.settings = {};
       this.$element = $(element);
       animate = function($subnav, type) {
-        return $subnav.stop(false, true)[_this.animateMethod[type]](_this.settings[type], _this.settings.easing, function() {
+        $subnav.stop(false, true);
+        return $subnav[animateMethods[_this.settings.animation][type]](_this.settings[type], _this.settings.easing, function() {
           return $(this)[type]();
         });
       };
@@ -28,6 +43,7 @@
         hideAll($item);
         $item.children("a").addClass(_this.settings.activeClass);
         window.clearTimeout($item.data("timeoutId"));
+        console.log(_this.settings.delayIn);
         return $item.data("timeoutId", window.setTimeout(function() {
           return animate($subnav, "show");
         }, _this.settings.delayIn));
@@ -41,11 +57,6 @@
       };
       getSubNav = function($link) {
         return $link.children("ul").first();
-      };
-      setElems = function() {
-        _this.$items = _this.$element.children("li");
-        _this.$links = _this.$items.children("a");
-        return _this.$subnavs = _this.$items.children("ul");
       };
       hideAll = function($item) {
         _this.$links.removeClass(_this.settings.activeClass);
@@ -68,29 +79,12 @@
           _this = this;
         this.settings = $.extend({}, this.defaults, options);
         self = this;
-        setElems();
+        this.$items = this.$element.children("li");
+        this.$links = this.$items.children("a");
+        this.$subnavs = this.$items.children("ul");
         hasEasingFunc = $.isFunction($.easing[this.settings.easing]);
         if (!hasEasingFunc) {
           this.settings.easing = "swing";
-        }
-        switch (this.settings.animation) {
-          case "fade":
-            this.animateMethod = {
-              show: "fadeIn",
-              hide: "fadeOut"
-            };
-            break;
-          case "slide":
-            this.animateMethod = {
-              show: "slideDown",
-              hide: "slideUp"
-            };
-            break;
-          default:
-            this.animateMethod = {
-              show: "show",
-              hide: "hide"
-            };
         }
         return this.$items.bind({
           mouseenter: function(e) {
