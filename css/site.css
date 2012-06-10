@@ -1,0 +1,81 @@
+body {
+  font-family: helvetica,'Georgia',arial,sans-serif;
+  background-color: #fafbf1;
+  color: #3C3C3C;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 48px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #3c3c3c;
+}
+
+h1 strong {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#main {
+  width: 980px;
+  margin:  0 auto;
+}
+
+/* NAV */
+nav { 
+  background:#333; 
+}
+
+#mini-dropdown {
+ font:13px normal helvetica,arial,sans-serif; 
+ margin:0 auto; 
+ width:600px; 
+ height:40px; 
+}
+
+#mini-dropdown ul { 
+  margin: 0;
+  padding: 0;
+}
+
+#mini-dropdown li { 
+  float:left; 
+  list-style-type:none; 
+  margin: 0;
+  padding: 0;
+}
+
+#mini-dropdown a { 
+  display:block; 
+  padding:12px 20px 0; 
+  height:28px; 
+  color:#ddd; 
+  text-decoration:none; 
+  text-shadow:1px 1px 0 #000; 
+  background:#333; 
+}
+
+#mini-dropdown a:hover, #nav a.active { 
+  background:#666; 
+}
+
+#mini-dropdown ul { 
+  position:absolute; 
+  display:none; 
+}
+
+#mini-dropdown ul li { 
+  float:none; 
+}
+
+#mini-dropdown ul li a {
+  width:150px; 
+  background:#666; 
+}
+
+#mini-dropdown ul li a:hover { 
+  background:#999; 
+  text-shadow:none; 
+  color:#000; 
+}
