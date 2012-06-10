@@ -10,15 +10,15 @@
 $ ->
   $.miniDropdown = (element, options) ->
     @defaults = 
-      activeClass: "active"
-      animation:   "basic"
-      easing:      "swing"
-      show:        0
-      hide:        0
-      delayIn:     0
-      delayOut:    0
-      showFunc:    null
-      hideFunc:    null
+      activeClass:  "active"
+      animation:    "basic"
+      easing:       "swing"
+      show:         0
+      hide:         0
+      delayIn:      0
+      delayOut:     0
+      hideFuntion:  null
+      showFunction: null
 
     animateMethods =
       basic:
@@ -41,38 +41,56 @@ $ ->
     @$element = $ element
 
     # Private methods
+    # Helper methods
+
+    getSubNav = ($item) => $item.children("ul").first()
+
+    setState = (@state) ->
+
+    checkEasingFunction = => @settings.easing = "swing"  unless $.isFunction($.easing[@settings.easing])
+
+    ## Animation
+    toggle = (type, $item) =>
+      $subnav = getSubNav($item)
+      window.clearTimeout $item.data("timeoutId")
+      
+      if type is 'show'
+        fn    = if $.isFunction(@settings.showFunction) then @settings.showFunction else show
+        delay = @settings.delayIn
+
+        hideAll $item
+        $item.children("a").addClass(@settings.activeClass)
+      else
+        fn    = if $.isFunction(@settings.hideFunction) then @settings.hideFunction else hide
+        delay = @settings.delayOut
+
+        $item.children("a").removeClass(@settings.activeClass)
+
+      $item.data "timeoutId", window.setTimeout(=>
+        fn.apply this, [ $item, $subnav ]
+      , delay)  
+
+    bindEvents = =>
+      @$items.bind
+        mouseenter: (e) => toggle('show', $(e.currentTarget))
+        mouseleave: (e) => toggle('hide', $(e.currentTarget))
+
     animate = ($subnav, type) =>
       $subnav.stop(false, true) 
-      $subnav[animateMethods[@settings.animation][type]](@settings[type], @settings.easing, ->
+      method = animateMethods[@settings.animation][type]
+      $subnav[method](@settings[type], @settings.easing, ->
         $(this)[type]()
       )
 
-    show = ($item, $subnav) =>
-      hideAll $item
-      $item.children("a").addClass(@settings.activeClass)
-      window.clearTimeout $item.data("timeoutId")
-      console.log(@settings.delayIn)
-      $item.data "timeoutId", window.setTimeout(=>
-        animate $subnav, "show"
-      , @settings.delayIn)
+    show = ($item, $subnav) => animate $subnav, "show"
 
-    hide = ($item, $subnav) =>
-      $item.children("a").removeClass(@settings.activeClass)
-      window.clearTimeout $item.data("timeoutId")
-      $item.data "timeoutId", window.setTimeout(=>
-        animate $subnav, "hide"
-      , @settings.delayOut)
-
-    getSubNav = ($link) => $link.children("ul").first()
+    hide = ($item, $subnav) => animate $subnav, "hide"
 
     hideAll = ($item) =>
       @$links.removeClass @settings.activeClass
       @$subnavs.stop(false, true).hide()
 
     # Public Methods
-    # set current state
-    setState = (@state) ->
-
     #get current state
     @getState = -> state
 
@@ -85,27 +103,15 @@ $ ->
       @settings[functionName]()
 
     @init = ->
+      setState 'loading'
       @settings = $.extend {}, @defaults, options
-      self = this
-
       @$items   = @$element.children("li")
       @$links   = @$items.children("a")
       @$subnavs = @$items.children("ul")
-
-      hasEasingFunc = ($.isFunction($.easing[@settings.easing]))
-      @settings.easing = "swing"  unless hasEasingFunc
-
-      @$items.bind
-        mouseenter: (e) =>
-          $item = $ e.currentTarget
-          $subnav = getSubNav($item)
-          fn = (if $.isFunction(@settings.showFunc) then @settings.showFunc else show)
-          fn.apply self, [ $item, $subnav ]
-        mouseleave: (e) =>
-          $item = $ e.currentTarget
-          $subnav = getSubNav($item)
-          fn = (if $.isFunction(@settings.hideFunc) then @settings.hideFunc else hide)
-          fn.apply self, [ $item, $subnav ]
+      
+      checkEasingFunction()
+      bindEvents()
+      setState 'loaded'
 
     @init()
 

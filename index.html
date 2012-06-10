@@ -10,9 +10,17 @@
   <![endif]-->
 </head>
 <body>
-  <nav>
-    <ul id="mini-dropdown">
-      <li><a href="#">Home</a></li>
+  <div id="container">
+    <nav>
+      <ul class="dropdown" id="mini-dropdown-1">
+       <li>
+        <a href="#">Home</a>
+        <ul>
+          <li><a href="#">Generic</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </li>
       <li>
         <a href="#">About</a>
         <ul>
@@ -35,12 +43,87 @@
     </ul>
   </nav>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
-  <script src="js/miniDropdown.js"></script>
-  <script>
-  $(function(){
-    $('#mini-dropdown').miniDropdown();
+  <nav>
+    <ul class="dropdown" id="mini-dropdown-2">
+      <li>
+        <a href="#">Home</a>
+        <ul>
+          <li><a href="#">Generic</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">About</a>
+        <ul>
+          <li><a href="#">Another</a></li>
+          <li><a href="#">Generic</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Another</a></li>
+      <li><a href="#">Generic</a></li>
+      <li><a href="#">Menu</a></li>
+    </ul>
+  </nav>
+
+  <nav>
+    <ul class="dropdown" id="mini-dropdown-3">
+      <li>
+        <a href="#">Home</a>
+        <ul>
+          <li><a href="#">Generic</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">About</a>
+        <ul>
+          <li><a href="#">Another</a></li>
+          <li><a href="#">Generic</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Another</a></li>
+      <li><a href="#">Generic</a></li>
+      <li><a href="#">Menu</a></li>
+    </ul>
+  </nav>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+<script src="js/miniDropdown.js"></script>
+<script>
+$(function(){
+    // Basic example
+    $('#mini-dropdown-1').miniDropdown();
+
+    // Built in animation
+    $('#mini-dropdown-2').miniDropdown({
+      animation: 'slide', 
+      show: 100,
+      hide: 100,
+      delayIn: 100,
+      delayOut: 100
+    });
+
+    // Custom animations
+    $('#mini-dropdown-3').miniDropdown({
+      showFunction: function(item, subnav) {
+        subnav.css({right: 0, opacity: 0}).show();
+        subnav.animate({right: $(window).width() - item.offset().left - item.width() , opacity: 1}, 200)
+      },
+      hideFunction: function(item, subnav) {
+        subnav.animate({right:  $(window).width(), opacity: 0}, 300, function(){
+          $(this).hide();
+        })
+      }
+
+    });
   });
-  </script>
+</script>
 </body>
 </html>
