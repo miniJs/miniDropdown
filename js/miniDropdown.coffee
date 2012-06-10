@@ -7,20 +7,84 @@
 # More info: http://minijs.com/
 #
 
-(($, window, undefined_) ->
-  miniDropdown = ($el, options) ->
-    @$el = $el
-    @config = $.extend({}, $.fn.miniDropdown.defaults, options or {})
-    @_init()
+$ ->
+  $.miniDropdown = (element, options) ->
+    @defaults = 
+      activeClass: "active"
+      animation:   "slide"
+      easing:      "swing"
+      show:        100
+      hide:        100
+      delayIn:     100
+      delayOut:    200
+      showFunc:    null
+      hideFunc:    null
 
-  miniDropdown:: =
-    _init: ->
+    # current state
+    @state = ''
+
+    # plugin settings
+    @settings = {}
+
+    # jQuery version of DOM element attached to the plugin
+    @$element = $ element
+
+    # Private methods
+    animate = ($subnav, type) =>
+      $subnav.stop(false, true)[@animateMethod[type]] @settings[type], @settings.easing, ->
+        $(this)[type]()
+
+    show = ($item, $subnav) =>
+      hideAll $item
+      $item.children("a").addClass(@settings.activeClass)
+      window.clearTimeout $item.data("timeoutId")
+      $item.data "timeoutId", window.setTimeout(=>
+        animate $subnav, "show"
+      , @settings.delayIn)
+
+    hide = ($item, $subnav) =>
+      $item.children("a").removeClass(@settings.activeClass)
+      window.clearTimeout $item.data("timeoutId")
+      $item.data "timeoutId", window.setTimeout(=>
+        animate $subnav, "hide"
+      , @settings.delayOut)
+
+    getSubNav = ($link) =>
+      $link.children("ul").first()
+
+    setElems = =>
+      @$items   = @$element.children("li")
+      @$links   = @$items.children("a")
+      @$subnavs = @$items.children("ul")
+
+    hideAll = ($item) =>
+      @$links.removeClass @settings.activeClass
+      @$subnavs.stop(false, true).hide()
+
+    # Public Methods
+    # set current state
+    setState = (@state) ->
+
+    #get current state
+    @getState = -> state
+
+    # get particular plugin setting
+    @getSetting = (settingKey) ->
+      @settings[settingKey]
+
+    # call one of the plugin setting functions
+    @callSettingFunction = (functionName) ->
+      @settings[functionName]()
+
+    @init = ->
+      @settings = $.extend {}, @defaults, options
       self = this
-      @_setElems()
-      hasEasingFunc = ($.isFunction($.easing[@config.easing]))
-      @config.easing = "swing"  unless hasEasingFunc
-      @animateMethod
-      switch @config.animation
+      setElems()
+
+      hasEasingFunc = ($.isFunction($.easing[@settings.easing]))
+      @settings.easing = "swing"  unless hasEasingFunc
+
+      switch @settings.animation
         when "fade"
           @animateMethod =
             show: "fadeIn"
@@ -31,82 +95,26 @@
             hide: "slideUp"
         else
           @animateMethod =
-            show: "fadeIn"
-            hide: "fadeOut"
+            show: "show"
+            hide: "hide"
+
       @$items.bind
-        mouseenter: (e) ->
-          $item = $(this)
-          $subnav = self._getSubNav($item)
-          fn = (if $.isFunction(self.config.showFunc) then self.config.showFunc else self._show)
+        mouseenter: (e) =>
+          $item = $ e.currentTarget
+          $subnav = getSubNav($item)
+          fn = (if $.isFunction(@settings.showFunc) then @settings.showFunc else show)
           fn.apply self, [ $item, $subnav ]
 
-        mouseleave: (e) ->
-          $item = $(this)
-          $subnav = self._getSubNav($item)
-          fn = (if $.isFunction(self.config.hideFunc) then self.config.hideFunc else self._hide)
+        mouseleave: (e) =>
+          $item = $ e.currentTarget
+          $subnav = getSubNav($item)
+          fn = (if $.isFunction(@settings.hideFunc) then @settings.hideFunc else hide)
           fn.apply self, [ $item, $subnav ]
 
-    _animate: ($subnav, type) ->
-      $subnav.stop(false, true)[@animateMethod[type]] @config[type], @config.easing, ->
-        $(this)[type]()
-
-    _show: ($item, $subnav) ->
-      self = this
-      @hideAll $item
-      $item.children("a").addClass @config.activeClass
-      window.clearTimeout $item.data("timeoutId")
-      $item.data "timeoutId", window.setTimeout(->
-        self._animate $subnav, "show"
-      , @config.delayIn)
-
-    _hide: ($item, $subnav) ->
-      self = this
-      $item.children("a").removeClass @config.activeClass
-      window.clearTimeout $item.data("timeoutId")
-      $item.data "timeoutId", window.setTimeout(->
-        self._animate $subnav, "hide"
-      , @config.delayOut)
-
-    _getSubNav: ($link) ->
-      $link.children("ul").first()
-
-    _setElems: ->
-      @$items = @$el.children("li")
-      @$links = @$items.children("a")
-      @$subnavs = @$items.children("ul")
-
-    hideAll: ($item) ->
-      @$links.removeClass @config.activeClass
-      @$subnavs.stop(false, true).hide()
+    @init()
 
   $.fn.miniDropdown = (options) ->
-    return this  unless @length
-    args = (if (arguments[1]) then Array::slice.call(arguments, 1) else null)
-    inst = undefined
-    @each ->
-      $elem = $(this)
-      return  unless $elem.find("ul").length
-      if typeof options is "string"
-        inst = $elem.data("naaav")
-        if inst[options]
-          inst[options].apply inst, args
-        else
-          $.error "Method " + options + " does not exist on jQuery.naaav"
-      else
-        return this  if $elem.data("naaav")
-        inst = new miniDropdown($elem, options)
-        $elem.data "naaav", inst
-
-    this
-
-  $.fn.miniDropdown.defaults =
-    activeClass: "active"
-    animation: "fade"
-    easing: "swing"
-    show: 100
-    hide: 100
-    delayIn: 100
-    delayOut: 200
-    showFunc: null
-    hideFunc: null
-) jQuery, window
+    return this.each ->
+      if undefined == ($ this).data('miniDropdown')
+        miniDropdown = new $.miniDropdown this, options
+        ($ this).data 'miniDropdown', miniDropdown
