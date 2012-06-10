@@ -1,10 +1,10 @@
 (($, window, undefined_) ->
-  Naaav = ($el, options) ->
+  miniDropdown = ($el, options) ->
     @$el = $el
-    @config = $.extend({}, $.fn.naaav.defaults, options or {})
+    @config = $.extend({}, $.fn.miniDropdown.defaults, options or {})
     @_init()
 
-  Naaav:: =
+  miniDropdown:: =
     _init: ->
       self = this
       @_setElems()
@@ -70,7 +70,7 @@
       @$links.removeClass @config.activeClass
       @$subnavs.stop(false, true).hide()
 
-  $.fn.naaav = (options) ->
+  $.fn.miniDropdown = (options) ->
     return this  unless @length
     args = (if (arguments[1]) then Array::slice.call(arguments, 1) else null)
     inst = undefined
@@ -85,12 +85,12 @@
           $.error "Method " + options + " does not exist on jQuery.naaav"
       else
         return this  if $elem.data("naaav")
-        inst = new Naaav($elem, options)
+        inst = new miniDropdown($elem, options)
         $elem.data "naaav", inst
 
     this
 
-  $.fn.naaav.defaults =
+  $.fn.miniDropdown.defaults =
     activeClass: "active"
     animation: "fade"
     easing: "swing"

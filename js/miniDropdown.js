@@ -2,13 +2,13 @@
 (function() {
 
   (function($, window, undefined_) {
-    var Naaav;
-    Naaav = function($el, options) {
+    var miniDropdown;
+    miniDropdown = function($el, options) {
       this.$el = $el;
-      this.config = $.extend({}, $.fn.naaav.defaults, options || {});
+      this.config = $.extend({}, $.fn.miniDropdown.defaults, options || {});
       return this._init();
     };
-    Naaav.prototype = {
+    miniDropdown.prototype = {
       _init: function() {
         var hasEasingFunc, self;
         self = this;
@@ -91,7 +91,7 @@
         return this.$subnavs.stop(false, true).hide();
       }
     };
-    $.fn.naaav = function(options) {
+    $.fn.miniDropdown = function(options) {
       var args, inst;
       if (!this.length) {
         return this;
@@ -115,13 +115,13 @@
           if ($elem.data("naaav")) {
             return this;
           }
-          inst = new Naaav($elem, options);
+          inst = new miniDropdown($elem, options);
           return $elem.data("naaav", inst);
         }
       });
       return this;
     };
-    return $.fn.naaav.defaults = {
+    return $.fn.miniDropdown.defaults = {
       activeClass: "active",
       animation: "fade",
       easing: "swing",
