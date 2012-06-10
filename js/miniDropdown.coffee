@@ -1,3 +1,12 @@
+#
+# miniDropdown, a dropdown plugin for jQuery
+# Instructions: coming soon...
+# By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @mattaussaguel
+# Version: coming soon...
+# Updated: June 10, 2012
+# More info: http://minijs.com/
+#
+
 (($, window, undefined_) ->
   miniDropdown = ($el, options) ->
     @$el = $el
