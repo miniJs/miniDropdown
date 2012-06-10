@@ -56,7 +56,7 @@ nav {
   background:#333; 
 }
 
-#mini-dropdown a:hover, #nav a.active { 
+#mini-dropdown a:hover, #mini-dropdown a.active { 
   background:#666; 
 }
 
