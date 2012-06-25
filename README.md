@@ -1,4 +1,4 @@
-# [miniDropdown jQuery plugin](http://minijs.com/plugins/8/notification) [![Build Status](https://secure.travis-ci.org/miniJs/miniDropdown.png?branch=master)](http://travis-ci.org/matthieua/miniDropdown)
+# [miniDropdown jQuery plugin](http://minijs.com/plugins/11/dropdown) [![Build Status](https://secure.travis-ci.org/miniJs/miniDropdown.png?branch=master)](http://travis-ci.org/matthieua/miniDropdown)
 
 miniDropdown is a dropdown jQuery plugin written in CoffeeScript useful for menus.
 
