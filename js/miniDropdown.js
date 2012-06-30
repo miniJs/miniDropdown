@@ -5,9 +5,9 @@
       var animate, animateMethods, bindEvents, checkEasingFunction, getSubNav, hide, hideAll, setState, show, toggle,
         _this = this;
       this.defaults = {
-        activeClass: "active",
-        animation: "basic",
-        easing: "swing",
+        activeClass: 'active',
+        animation: 'basic',
+        easing: 'swing',
         show: 0,
         hide: 0,
         delayIn: 0,
@@ -17,16 +17,16 @@
       };
       animateMethods = {
         basic: {
-          show: "show",
-          hide: "hide"
+          show: 'show',
+          hide: 'hide'
         },
         fade: {
-          show: "fadeIn",
-          hide: "fadeOut"
+          show: 'fadeIn',
+          hide: 'fadeOut'
         },
         slide: {
-          show: "slideDown",
-          hide: "slideUp"
+          show: 'slideDown',
+          hide: 'slideUp'
         }
       };
       this.state = '';

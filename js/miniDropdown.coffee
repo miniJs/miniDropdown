@@ -10,9 +10,9 @@
 $ ->
   $.miniDropdown = (element, options) ->
     @defaults = 
-      activeClass:  "active" # css class added to the ul active element
-      animation:    "basic"  # dropdown animation: 'basic' | 'fade' | 'slide'
-      easing:       "swing"  # easing equation used during the animation
+      activeClass:  'active' # css class added to the ul active element
+      animation:    'basic'  # dropdown animation: 'basic' | 'fade' | 'slide'
+      easing:       'swing'  # easing equation used during the animation
       show:         0        # show animation duration in milliseconds
       hide:         0        # hide animation duration in milliseconds
       delayIn:      0        # delay duration on show in milliseconds
@@ -22,14 +22,14 @@ $ ->
 
     animateMethods =
       basic:
-        show: "show"
-        hide: "hide"
+        show: 'show'
+        hide: 'hide'
       fade:
-        show: "fadeIn"
-        hide: "fadeOut"
+        show: 'fadeIn'
+        hide: 'fadeOut'
       slide:
-        show: "slideDown"
-        hide: "slideUp"
+        show: 'slideDown'
+        hide: 'slideUp'
 
     # current state
     @state = ''
