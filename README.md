@@ -30,7 +30,7 @@ To be able to run the test suite, you'll need to install the Jasmine gem. If you
 Guard automatically tests your Jasmine specs when files are modified which will significantly increase your productivity.
 
 - intall [phantomjs](http://phantomjs.org/) or just run `brew install phantomjs`
-- run `guard` from the plugin directory
+- run `guard` from the plugin directory - note that sinon doesn't play nice guard at the moment
 
 ## Developer
 
@@ -45,7 +45,7 @@ Special thanks to Victor Nguyen [@victornguyen](http://twitter.com/victornguyen)
 
 ## To Do
 
-- Add test coverage
+- Make it responsive
 
 ## Licence
 
