@@ -1,9 +1,8 @@
 #
 # miniDropdown, a dropdown plugin for jQuery
-# Instructions: coming soon...
+# Instructions: http://minijs.com/plugins/11/dropdown
 # By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @mattaussaguel
-# Version: v0.1 Beta
-# Updated: June 10, 2012
+# Version: v1.0 stable
 # More info: http://minijs.com/
 #
 

@@ -4,7 +4,7 @@ miniDropdown is a dropdown jQuery plugin written in CoffeeScript useful for menu
 
 ## Version
 
-v0.1 Beta
+v1.0 stable
 
 ## Website Url
 
